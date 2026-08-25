@@ -7,7 +7,7 @@ cask "dotbuddy" do
   desc "Manage your shell aliases and environment variables"
   homepage "https://github.com/zackwag/DotBuddy"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "DotBuddy.app"
 
