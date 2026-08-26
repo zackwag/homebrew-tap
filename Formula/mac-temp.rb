@@ -1,12 +1,11 @@
 class MacTemp < Formula
   desc "Lightweight CLI to read CPU and thermal sensor temperatures on Apple Silicon Macs"
   homepage "https://github.com/zackwag/mac-temp"
-  url "https://github.com/zackwag/mac-temp/releases/download/v1.0.0/mac-temp"
-  version "1.0.0"
-  sha256 "aea03c72f13cbb7a1d19132c347af41b7232f5bfe0d63dd81c6eb14a041115d9"
+  url "https://github.com/zackwag/mac-temp/releases/download/v#{version}/mac-temp"
+  version "1.1.0"
+  sha256 "31b0a25fb01e1934819bf6061ae8bf7437397354be9494d07908a4b1da551dc0"
   license "MIT"
 
-  depends_on arch: :arm64
   depends_on :macos
 
   def install
