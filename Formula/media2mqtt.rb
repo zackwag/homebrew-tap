@@ -7,6 +7,7 @@ class Media2mqtt < Formula
   license "MIT"
 
   depends_on :macos
+  depends_on "nowplaying-cli"
   depends_on "python@3.13"
 
   resource "paho-mqtt" do
