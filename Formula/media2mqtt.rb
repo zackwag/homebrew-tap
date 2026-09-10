@@ -48,6 +48,7 @@ class Media2mqtt < Formula
     BASH
 
     (etc/"media2mqtt").mkpath
+    rm_f etc/"media2mqtt/config.default"
     (etc/"media2mqtt/config.default").write <<~EOS
       MQTT_HOST=
       MQTT_PORT=1883
