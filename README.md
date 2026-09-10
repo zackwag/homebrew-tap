@@ -14,6 +14,9 @@ brew install zackwag/tap/dotbuddy
 # mac-temp — read CPU/thermal sensor temperatures on Apple Silicon
 brew install zackwag/tap/mac-temp
 
+# media2mqtt — publish macOS media app playback state to Home Assistant via MQTT
+brew install zackwag/tap/media2mqtt
+
 # sudo-touchid — enable Touch ID for sudo on macOS
 brew install zackwag/tap/sudo-touchid
 ```
@@ -24,5 +27,6 @@ brew install zackwag/tap/sudo-touchid
 brew upgrade brew-export
 brew upgrade dotbuddy
 brew upgrade mac-temp
+brew upgrade media2mqtt
 brew upgrade sudo-touchid
 ```
