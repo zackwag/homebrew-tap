@@ -1,9 +1,9 @@
 class Media2mqtt < Formula
   desc "Publish macOS media app playback state to Home Assistant via MQTT"
   homepage "https://github.com/zackwag/media2mqtt"
-  version "1.4.0"
+  version "1.4.1"
   url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v#{version}.tar.gz"
-  sha256 "62b76621fc1cfa2f7189f1eb08484fbbb5452b8f161977147397b43553a3f7cc"
+  sha256 "aeef41fbf549ee676dc9d07c2659feb2c83087b3aa94494689682b63b954f79e"
   license "MIT"
 
   depends_on :macos
