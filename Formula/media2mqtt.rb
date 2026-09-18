@@ -47,7 +47,7 @@ class Media2mqtt < Formula
     BASH
 
     (etc/"media2mqtt").mkpath
-    (etc/"media2mqtt/config.default").write <<~EOS
+    (etc/"media2mqtt/config.default").atomic_write <<~EOS
       MQTT_HOST=
       MQTT_PORT=1883
       MQTT_USERNAME=
