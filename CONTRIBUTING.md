@@ -23,6 +23,8 @@ brew style Formula/<name>.rb
 brew install --build-from-source Formula/<name>.rb   # sanity-check it installs
 ```
 
+`brew style` also runs automatically in CI (the "Lint" workflow) on every pull request.
+
 Each formula/cask here tracks a specific zackwag project (e.g. `brew-export.rb`, `mac-temp.rb`, `media2mqtt.rb`, `sudo-touchid.rb`, `dotbuddy.rb`) — most changes should be version bumps when the upstream project releases.
 
 ## Commit messages and pull requests

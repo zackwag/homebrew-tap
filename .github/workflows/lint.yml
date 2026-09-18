@@ -1,0 +1,26 @@
+name: Lint
+
+# Runs `brew style` (Homebrew's own formula/cask linter) against every
+# Formula and Cask. This catches Homebrew-specific issues (e.g. component
+# ordering, FormulaAudit cops, cask array formatting) that generic RuboCop
+# would miss. Runs on macOS since Homebrew ships preinstalled there and
+# some formulae/casks in this tap are macOS-only.
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: brew style
+        run: brew style Formula/*.rb Casks/*.rb
