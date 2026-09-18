@@ -22,7 +22,7 @@ brew style Formula/<name>.rb
 brew install --build-from-source Formula/<name>.rb
 ```
 
-No CI-run test suite currently exists; these checks are run manually before a PR.
+`brew style` runs in CI on every PR (the "Lint" workflow). `brew audit --strict` and the install sanity check are run manually before a PR.
 
 ## Repository structure
 

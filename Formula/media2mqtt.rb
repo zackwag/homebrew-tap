@@ -1,8 +1,7 @@
 class Media2mqtt < Formula
   desc "Publish macOS media app playback state to Home Assistant via MQTT"
   homepage "https://github.com/zackwag/media2mqtt"
-  version "1.5.0"
-  url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v#{version}.tar.gz"
+  url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v1.5.0.tar.gz"
   sha256 "d4d82b3f67d52680e5c942368ed55f17edcddf8f4f39d6b0a69f411ff0fdf711"
   license "MIT"
 
@@ -17,7 +16,7 @@ class Media2mqtt < Formula
 
   def install
     venv = libexec/"venv"
-    system Formula["python@3.13"].opt_bin/"python3.13", "-m", "venv", venv
+    system formula_opt_bin("python@3.13")/"python3.13", "-m", "venv", venv
     venv_pip = venv/"bin/pip"
 
     resource("paho-mqtt").stage do
@@ -48,7 +47,6 @@ class Media2mqtt < Formula
     BASH
 
     (etc/"media2mqtt").mkpath
-    rm_f etc/"media2mqtt/config.default"
     (etc/"media2mqtt/config.default").write <<~EOS
       MQTT_HOST=
       MQTT_PORT=1883
