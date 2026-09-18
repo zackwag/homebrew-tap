@@ -8,6 +8,9 @@ Homebrew formulae and casks by [Zack Wagner](https://github.com/zackwag).
 # brew-export — export your Homebrew setup and dotfiles into a portable tarball
 brew install zackwag/tap/brew-export
 
+# docker-container-shim — rewrite docker subcommands to Apple's container CLI syntax
+brew install zackwag/tap/docker-container-shim
+
 # DotBuddy — manage shell aliases and environment variables
 brew install zackwag/tap/dotbuddy
 
@@ -25,6 +28,7 @@ brew install zackwag/tap/sudo-touchid
 
 ```bash
 brew upgrade brew-export
+brew upgrade docker-container-shim
 brew upgrade dotbuddy
 brew upgrade mac-temp
 brew upgrade media2mqtt
