@@ -1,7 +1,7 @@
 class Media2mqtt < Formula
   desc "Publish macOS media app playback state to Home Assistant via MQTT"
   homepage "https://github.com/zackwag/media2mqtt"
-  url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v1.5.0.tar.gz"
+  url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v1.6.0.tar.gz"
   sha256 "9e8974bd86efcc536f96d7f4366807a6792cc45ca04f5fa37ddbb1b86794dffd"
   license "MIT"
 
@@ -23,7 +23,8 @@ class Media2mqtt < Formula
       system venv_pip, "install", "--no-deps", "."
     end
 
-    libexec.install "main.py", "media_apps.py", "mqtt_publisher.py"
+    # Keep in sync with media2mqtt's own .py modules - nothing here re-derives this list.
+    libexec.install "main.py", "media_apps.py", "mqtt_publisher.py", "playback_control.py"
 
     (bin/"media2mqtt").write <<~BASH
       #!/usr/bin/env bash
