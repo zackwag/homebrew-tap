@@ -11,7 +11,5 @@ cask "dotbuddy" do
 
   app "DotBuddy.app"
 
-  zap trash: [
-    "~/Library/Preferences/dev.zackwag.DotBuddy.plist",
-  ]
+  zap trash: "~/Library/Preferences/dev.zackwag.DotBuddy.plist"
 end
