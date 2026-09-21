@@ -24,7 +24,8 @@ class Media2mqtt < Formula
     end
 
     # Keep in sync with media2mqtt's own .py modules - nothing here re-derives this list.
-    libexec.install "main.py", "media_apps.py", "mqtt_publisher.py", "playback_control.py"
+    libexec.install "main.py", "media_apps.py", "mqtt_publisher.py", "playback_control.py",
+                    "coordinator.py"
 
     (bin/"media2mqtt").write <<~BASH
       #!/usr/bin/env bash
@@ -47,6 +48,27 @@ class Media2mqtt < Formula
       exec "#{libexec}/venv/bin/python" "#{libexec}/main.py"
     BASH
 
+    (bin/"media2mqtt-coordinator").write <<~BASH
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      CONFIG_FILE="${MEDIA2MQTT_COORDINATOR_CONFIG:-#{etc}/media2mqtt/coordinator.config}"
+
+      if [ ! -f "$CONFIG_FILE" ]; then
+          echo "ERROR: Config file not found: $CONFIG_FILE"
+          echo "Create it from the default:"
+          echo "    cp #{etc}/media2mqtt/coordinator.config.default $CONFIG_FILE"
+          exit 1
+      fi
+
+      while IFS='=' read -r key value; do
+          [[ -z "$key" || "$key" == \\#* ]] && continue
+          [ -n "$value" ] && export "$key=$value"
+      done < "$CONFIG_FILE"
+
+      exec "#{libexec}/venv/bin/python" "#{libexec}/coordinator.py"
+    BASH
+
     (etc/"media2mqtt").mkpath
     (etc/"media2mqtt/config.default").atomic_write <<~EOS
       MQTT_HOST=
@@ -60,8 +82,23 @@ class Media2mqtt < Formula
       POLL_INTERVAL_SECONDS=1
     EOS
 
+    (etc/"media2mqtt/coordinator.config.default").atomic_write <<~EOS
+      MQTT_HOST=
+      MQTT_PORT=1883
+      MQTT_USERNAME=
+      MQTT_PASSWORD=
+      MQTT_DISCOVERY_PREFIX=homeassistant
+      MQTT_TOPIC_PREFIX=media2mqtt
+      GROUP_NAME=Now Playing
+      GROUP_DEVICE_NAME=media2mqtt
+    EOS
+
     unless (etc/"media2mqtt/config").exist?
       cp etc/"media2mqtt/config.default", etc/"media2mqtt/config"
+    end
+
+    unless (etc/"media2mqtt/coordinator.config").exist?
+      cp etc/"media2mqtt/coordinator.config.default", etc/"media2mqtt/coordinator.config"
     end
   end
 
@@ -72,6 +109,10 @@ class Media2mqtt < Formula
 
       Then start the service:
           brew services start media2mqtt
+
+      To run the grouped media_player coordinator:
+          nano #{etc}/media2mqtt/coordinator.config
+          media2mqtt-coordinator
     EOS
   end
 
@@ -85,5 +126,6 @@ class Media2mqtt < Formula
 
   test do
     assert_predicate bin/"media2mqtt", :executable?
+    assert_predicate bin/"media2mqtt-coordinator", :executable?
   end
 end
