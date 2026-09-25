@@ -1,8 +1,8 @@
 cask "dotbuddy" do
-  version "2.6.0"
-  sha256 "114796a86ac932f3a98f0f6266f7f9e018068c189cf14b3b120121c090888a57"
+  version "2.6.1"
+  sha256 "61ad3c8a98f9d7c80935e51e6e522f2b7d69416557e73ec938cccf8cface594c"
 
-  url "https://github.com/zackwag/DotBuddy/releases/download/v2.6.0/DotBuddy.zip"
+  url "https://github.com/zackwag/DotBuddy/releases/download/v2.6.1/DotBuddy.zip"
   name "DotBuddy"
   desc "Manage your shell aliases and environment variables"
   homepage "https://github.com/zackwag/DotBuddy"
