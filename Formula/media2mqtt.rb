@@ -24,7 +24,8 @@ class Media2mqtt < Formula
     end
 
     # Keep in sync with media2mqtt's own .py modules - nothing here re-derives this list.
-    libexec.install "main.py", "media_apps.py", "mqtt_publisher.py", "playback_control.py"
+    libexec.install "main.py", "media_apps.py", "mqtt_publisher.py", "playback_control.py",
+                     "scrobbler.py", "lastfm_auth.py"
 
     (bin/"media2mqtt").write <<~BASH
       #!/usr/bin/env bash
@@ -47,6 +48,12 @@ class Media2mqtt < Formula
       exec "#{libexec}/venv/bin/python" "#{libexec}/main.py"
     BASH
 
+    (bin/"lastfm_auth").write <<~BASH
+      #!/usr/bin/env bash
+      set -euo pipefail
+      exec "#{libexec}/venv/bin/python" "#{libexec}/lastfm_auth.py" "$@"
+    BASH
+
     (etc/"media2mqtt").mkpath
     (etc/"media2mqtt/config.default").atomic_write <<~EOS
       MQTT_HOST=
@@ -58,6 +65,12 @@ class Media2mqtt < Formula
       DEVICE_NAME=
       ENABLED_APPS=music
       POLL_INTERVAL_SECONDS=1
+
+      # Scrobbling (optional): run `lastfm_auth` to get a session key, then
+      # uncomment and set it here. See https://github.com/zackwag/media2mqtt#scrobbling
+      #LASTFM_SESSION_KEY=
+      #LASTFM_API_KEY=
+      #LASTFM_API_SECRET=
     EOS
 
     unless (etc/"media2mqtt/config").exist?
@@ -72,6 +85,10 @@ class Media2mqtt < Formula
 
       Then start the service:
           brew services start media2mqtt
+
+      To scrobble to Last.fm (optional), run `lastfm_auth`, approve access in
+      the browser, then add the printed LASTFM_SESSION_KEY to the config file
+      above and restart the service.
     EOS
   end
 
@@ -85,5 +102,6 @@ class Media2mqtt < Formula
 
   test do
     assert_predicate bin/"media2mqtt", :executable?
+    assert_predicate bin/"lastfm_auth", :executable?
   end
 end
