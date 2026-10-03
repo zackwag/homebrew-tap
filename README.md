@@ -11,6 +11,9 @@ brew install zackwag/tap/brew-export
 # docker-container-shim — rewrite docker subcommands to Apple's container CLI syntax
 brew install zackwag/tap/docker-container-shim
 
+# dockhide — hide any macOS app's Dock icon
+brew install zackwag/tap/dockhide
+
 # DotBuddy — manage shell aliases and environment variables
 brew install zackwag/tap/dotbuddy
 
@@ -19,6 +22,9 @@ brew install zackwag/tap/mac-temp
 
 # media2mqtt — publish macOS media app playback state to Home Assistant via MQTT
 brew install zackwag/tap/media2mqtt
+
+# media2mqtt-coordinator — group media2mqtt players across multiple Macs
+brew install zackwag/tap/media2mqtt-coordinator
 
 # sudo-touchid — enable Touch ID for sudo on macOS
 brew install zackwag/tap/sudo-touchid
@@ -29,8 +35,10 @@ brew install zackwag/tap/sudo-touchid
 ```bash
 brew upgrade brew-export
 brew upgrade docker-container-shim
+brew upgrade dockhide
 brew upgrade dotbuddy
 brew upgrade mac-temp
 brew upgrade media2mqtt
+brew upgrade media2mqtt-coordinator
 brew upgrade sudo-touchid
 ```
