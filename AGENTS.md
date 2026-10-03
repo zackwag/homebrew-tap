@@ -26,7 +26,7 @@ brew install --build-from-source Formula/<name>.rb
 
 ## Repository structure
 
-- `Formula/` — CLI tool formulae: `brew-export.rb`, `dockhide.rb`, `mac-temp.rb`, `media2mqtt.rb`, `sudo-touchid.rb`
+- `Formula/` — CLI tool formulae: `brew-export.rb`, `docker-container-shim.rb`, `dockhide.rb`, `mac-temp.rb`, `media2mqtt.rb`, `media2mqtt-coordinator.rb`, `sudo-touchid.rb`
 - `Casks/` — GUI app casks: `dotbuddy.rb`
 
 Each entry mirrors a release of the corresponding zackwag repo (version, URL, sha256) — most changes are version bumps after an upstream release, not new logic.
