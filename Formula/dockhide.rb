@@ -1,8 +1,8 @@
 class Dockhide < Formula
   desc "Hide any macOS app's Dock icon"
   homepage "https://github.com/zackwag/dockhide"
-  url "https://github.com/zackwag/dockhide/releases/download/v1.0.0/dockhide"
-  sha256 "d68ed05e05eb819ffda081dfc4797d1b405d92b0dc0da4af50edcf0b208503d4"
+  url "https://github.com/zackwag/dockhide/releases/download/v1.0.1/dockhide"
+  sha256 "064bcdc83a164eb315df211a705f0331057657e54cd1279633c5f70bd476355d"
   license "MIT"
 
   depends_on :macos
