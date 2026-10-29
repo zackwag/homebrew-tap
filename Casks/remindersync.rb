@@ -1,6 +1,6 @@
 cask "remindersync" do
-  version "0.4.0"
-  sha256 "490b1b21a948c5cba2c846efd63d818e11a7abf86a4b84a30a6069fcc3f45fa9"
+  version "0.5.0"
+  sha256 "b8ebfdfd7308f88e26e8e8f490de9c000e26f9d2d2a483eab8f0e9e0182e90a6"
 
   url "https://github.com/zackwag/remindersync/releases/download/v#{version}/ReminderSync.zip"
   name "ReminderSync"
