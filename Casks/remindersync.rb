@@ -13,7 +13,7 @@ cask "remindersync" do
   binary "#{appdir}/ReminderSync.app/Contents/MacOS/remindersync"
 
   uninstall launchctl: "com.zackwag.remindersync",
-  delete:    "~/Library/LaunchAgents/com.zackwag.remindersync.plist"
+            delete:    "~/Library/LaunchAgents/com.zackwag.remindersync.plist"
 
   zap trash: [
     "~/Library/Application Support/remindersync",
