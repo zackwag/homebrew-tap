@@ -1,8 +1,8 @@
 class Media2mqttCoordinator < Formula
   desc "Grouped media_player coordinator for multi-Mac media2mqtt setups"
   homepage "https://github.com/zackwag/media2mqtt"
-  url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v3.1.1.tar.gz"
-  sha256 "10c4efab653cd4d4be9db7928ae03a6f7d81ca0578fb62af62178fd7a01c1a73"
+  url "https://github.com/zackwag/media2mqtt/archive/refs/tags/v3.2.0.tar.gz"
+  sha256 "ba2c377fdbcc605ae63ee33ce751796c2a0f51b8db39cd6710bd564ae0189e71"
   license "MIT"
 
   depends_on "python@3.13"
