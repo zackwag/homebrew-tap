@@ -29,7 +29,7 @@ brew install --build-from-source Formula/<name>.rb
 - `Formula/` — CLI tool formulae: `brew-export.rb`, `docker-container-shim.rb`, `dockhide.rb`, `mac-temp.rb`, `media2mqtt.rb`, `media2mqtt-coordinator.rb`, `sudo-touchid.rb`
 - `Casks/` — GUI app casks: `dotbuddy.rb`
 
-Each entry mirrors a release of the corresponding zackwag repo (version, URL, sha256) — most changes are version bumps after an upstream release, not new logic.
+Each entry mirrors a release of the corresponding zackwag repo (version, URL, sha256) — most changes are version bumps after an upstream release, not new logic. Those bumps come from app repos calling `.github/workflows/update-formula.yml` (reusable), which edits only the top-level version and sha256 in place via `.github/scripts/bump_formula.py`; the rest of each file is maintained here by hand. Keep that workflow and script working for every formula/cask, and test changes with `DRY_RUN=1 FILES=... VERSION=... SHA256=... .github/scripts/update-formula.sh` plus `brew style` on the result.
 
 ## Commit and PR conventions
 

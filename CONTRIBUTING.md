@@ -27,6 +27,26 @@ brew install --build-from-source Formula/<name>.rb   # sanity-check it installs
 
 Each formula/cask here tracks a specific zackwag project (e.g. `brew-export.rb`, `mac-temp.rb`, `media2mqtt.rb`, `sudo-touchid.rb`, `dotbuddy.rb`) — most changes should be version bumps when the upstream project releases.
 
+## Automated updates from app releases
+
+Each formula/cask here is the source of truth for everything except its version and sha256. App repos bump those after a release by calling the reusable [`update-formula`](.github/workflows/update-formula.yml) workflow, which rewrites only the top-level `url`/`version` version and the top-level `sha256` (so caveats, tests, resources and hand edits survive), opens a `chore(<name>): update to X.Y.Z` PR, and squash-merges it once Conventional Commits and Lint pass. If a check fails, the PR stays open and the calling release job fails.
+
+To adopt it, add a job after the one that builds the release artifact and exposes its version and sha256 as job outputs:
+
+```yaml
+  tap:
+    needs: build
+    uses: zackwag/homebrew-tap/.github/workflows/update-formula.yml@main
+    with:
+      files: Formula/<name>.rb # space-separated if one release feeds several
+      version: ${{ needs.build.outputs.version }} # no leading v
+      sha256: ${{ needs.build.outputs.sha256 }}
+    secrets:
+      token: ${{ secrets.TAP_TOKEN }} # Contents + Pull requests read/write on this repo
+```
+
+The formula/cask has to exist here first, with a top-level `url` containing `/vX.Y.Z` or a top-level `version "X.Y.Z"`, and a top-level `sha256`.
+
 ## Commit messages and pull requests
 
 This repo uses [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `docs:`, `chore:`, etc.). Pull requests are squash-merged, and the **PR title** becomes the commit on `main` — so PR titles must follow this format. This is enforced automatically by the "Conventional Commits" check.
