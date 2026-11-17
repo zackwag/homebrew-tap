@@ -1,0 +1,46 @@
+name: Update formula
+
+# Reusable workflow an app repo calls after a release to bump its formula or
+# cask here: rewrites the version and sha256 in place, opens a PR, and
+# squash-merges it once this repo's checks pass. Usage is in CONTRIBUTING.md.
+
+on:
+  workflow_call:
+    inputs:
+      files:
+        description: Space-separated Formula/*.rb or Casks/*.rb paths to bump (they share the version and sha256).
+        type: string
+        required: true
+      version:
+        description: Release version without the leading v, e.g. 1.4.0.
+        type: string
+        required: true
+      sha256:
+        description: sha256 of the release artifact the formula's url points at.
+        type: string
+        required: true
+    secrets:
+      token:
+        description: Token with Contents and Pull requests read/write on zackwag/homebrew-tap.
+        required: true
+
+permissions: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out homebrew-tap
+        uses: actions/checkout@v7
+        with:
+          repository: zackwag/homebrew-tap
+          token: ${{ secrets.token }}
+
+      - name: Bump, open a PR, and merge once checks pass
+        env:
+          GH_TOKEN: ${{ secrets.token }}
+          FILES: ${{ inputs.files }}
+          VERSION: ${{ inputs.version }}
+          SHA256: ${{ inputs.sha256 }}
+        run: .github/scripts/update-formula.sh
